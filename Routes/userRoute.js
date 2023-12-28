@@ -44,7 +44,7 @@ userRouter.post("/login",async(req,res)=>{
                     res.status(200).send({'data':`${user.username} has successfully logged In`,token})
                 }
                 else{
-                    res.status(401).send({'data':"Invalid Credentials. Please try Again"})
+                    res.status(200).send({'data':"Invalid Credentials. Please try Again"})
 
                 }
             })
