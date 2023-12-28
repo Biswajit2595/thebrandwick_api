@@ -12,7 +12,7 @@ userRouter.post("/signup",async(req,res)=>{
     try {
         const user= await UserModel.findOne({email})
         if(user){
-            res.status(200).send({"data":"User is already a registered. User Please Login"})
+            res.status(200).send({"data":"Email is already registered. Please Login"})
         }
         else{
             bcrypt.hash(password,saltrounds,async(err,hash)=>{
