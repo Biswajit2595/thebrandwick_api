@@ -39,11 +39,14 @@ userRouter.post("/login",async(req,res)=>{
         }
         else{
             bcrypt.compare(password,user.password,(err,result)=>{
-                if(err){
-                    res.status(401).send({'data':"Invalid Credentials. Please try Again"})
+                if(result){
+                    const token=jwt.sign({username:user.username},process.env.private_key)
+                    res.status(200).send({'data':`${user.username} has successfully logged In`,token})
                 }
-                const token=jwt.sign({username:user.username},process.env.private_key)
-                res.status(200).send({'data':`${user.username} has successfully logged In`,token})
+                else{
+                    res.status(401).send({'data':"Invalid Credentials. Please try Again"})
+
+                }
             })
         }
     } catch (error) {
